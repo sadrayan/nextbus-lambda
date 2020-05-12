@@ -6,7 +6,7 @@ phases:
   build:
     commands:
       - npm install 
-      - export BUCKET=nextbusmap-lambda-pipeline
+      - export BUCKET=nextbus-lambda-artifact
       - aws cloudformation package --template-file samTemplate.yaml --s3-bucket $BUCKET  --output-template-file outputSamTemplate.yaml
 artifacts:
   type: zip
