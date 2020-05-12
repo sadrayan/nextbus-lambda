@@ -1,0 +1,38 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: AWS::Serverless-2016-10-31
+Description: >
+  nextbus-api
+
+  Sample SAM Template for nextbus-api
+  
+Globals:
+  Function:
+    Timeout: 10
+
+Resources:
+  NextbusFunction:
+    Type: AWS::Serverless::Function 
+    Properties:
+      CodeUri: nextbusAPI/
+      Handler: app.lambdaHandler
+      Runtime: nodejs12.x
+      MemorySize: 128
+      Description: 'Lambda function to get nextBusMap '
+      Role: 'arn:aws:iam::575711874019:role/lambdaBasicExecutionRole'
+      Events:
+        NextbusAPI:
+          Type: Api 
+          Properties:
+            Path: /*
+            Method: get
+
+Outputs:
+  NextbusApi:
+    Description: "API Gateway endpoint URL for Prod stage for Nextbus function"
+    Value: !Sub "https://${ServerlessRestApi}.execute-api.${AWS::Region}.amazonaws.com/Prod/"
+  NextbusFunction:
+    Description: "Nextbus Lambda Function ARN"
+    Value: !GetAtt NextbusFunction.Arn
+  NextbusFunctionIamRole:
+    Description: "Implicit IAM Role created for Nextbus function"
+    Value: !GetAtt NextbusFunctionRole.Arn

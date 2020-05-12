@@ -1,0 +1,15 @@
+version: 0.2
+phases:
+  install:
+    runtime-versions:
+        nodejs: 12
+  build:
+    commands:
+      - npm install 
+      - export BUCKET=nextbusmap-lambda-pipeline
+      - aws cloudformation package --template-file samTemplate.yaml --s3-bucket $BUCKET  --output-template-file outputSamTemplate.yaml
+artifacts:
+  type: zip
+  files:
+    - samTemplate.yaml
+    - outputSamTemplate.yaml
