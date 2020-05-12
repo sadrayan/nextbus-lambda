@@ -18,7 +18,6 @@ Resources:
       Runtime: nodejs12.x
       MemorySize: 128
       Description: 'Lambda function to get nextBusMap '
-      Role: 'arn:aws:iam::575711874019:role/lambdaBasicExecutionRole'
       Events:
         NextbusAPI:
           Type: Api 
